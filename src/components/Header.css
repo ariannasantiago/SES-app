@@ -1,0 +1,11 @@
+.header {
+    background-color: #013D5B;
+    min-height: 10vh;
+
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: white;
+    background-size: cover;
+    padding: 2rem 1rem;
+
+}
