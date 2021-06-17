@@ -73,6 +73,8 @@ function MovieSearchList() {
 
     } 
 
+    //hello
+
     function previousPage() {
         if (pageNum !== 1) {
             setPageNum(pageNum-1,  
@@ -100,6 +102,7 @@ function MovieSearchList() {
                     <button className="search">Submit</button>
 
                 </form>
+                
 
                 <div className="pagebuttons">
                     <button onClick={previousPage} style={{marginLeft: "0%"}}>Previous Page</button>
