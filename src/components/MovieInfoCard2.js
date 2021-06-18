@@ -63,32 +63,6 @@ function MovieInfoCard2(props) {
     } else {
 
         return (
-            // <div>
-            // <li movie={movieData}>map: {movie.Title} {movie.imdbID}</li>
-            // <li movie={movieObj}>obj: {movie.Title} {movie.imdbID}</li>
-            // </div>
-
-            // <div class="card mb-3" style={{maxwidth: "10rem"}}>
-            //       <div class="row g-0">
-            //         <div class="col-md-4" style={{maxwidth: "10rem"}}>
-            //             <Card.Img variant ="top" src={moviePoster}></Card.Img>
-            //         </div>
-            //         <div class="col-md-8">
-            //             <Card.Body>
-            //                 <Card.Title>{movieTitle}</Card.Title>
-            //                 <Card.Subtitle className="mb-s text-muted">{movieYear}</Card.Subtitle>
-            //                 <Card.Text>
-            //                 <p>
-            //                         Runtime: {movieRuntime}<br></br>
-            //                         Genre: {movieGenre}<br></br>
-            //                         Director: {movieDirector}<br></br>
-            //                         Rating: {movieRating}<br></br>
-            //                 </p>
-            //                 </Card.Text>
-            //             </Card.Body>
-            //         </div>
-            //     </div>
-            // </div>
 
             <div class="card h-100 " style = {{ width: '14rem'}}>
                     <div><Card.Img variant ="top" src={moviePoster}></Card.Img></div>

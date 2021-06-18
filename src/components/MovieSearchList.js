@@ -12,6 +12,8 @@ function MovieSearchList() {
     const [resultBoolean, setresultBoolean] = useState(true);
     const [error, setError] = useState(null);
 
+    const [loading, setLoading] = useState(false);
+
     function handleSumbit(e) {
         e.preventDefault();
         setTotalPages(0);
@@ -37,6 +39,12 @@ function MovieSearchList() {
             setPageNum(1);
             setTotalResults(0);
         } 
+        else if (loading) {
+            //if want to load more, add movies to result array, set loading false when finished
+            console.log("loading brand triggered");
+            setMovies([...movies, ...response['Search']]);
+            setLoading(false, console.log('loading false'));
+        }
         else {
 
             setresultBoolean(true, console.log('Results? ', resultBoolean));
@@ -81,16 +89,21 @@ function MovieSearchList() {
             console.log('prev -> current page',pageNum)
             );
         }
-
-
     }
 
+    function loadMore() {
+        if (pageNum < totalPages) {
+            console.log("load more clicked");
+            setLoading(true, console.log('loading true'));
+            setPageNum(pageNum+1);
+        }
+    }
 
 
 
     return (
         <div className="moviesearchlist">
-            <section class="hero">
+            <div class="hero">
                 <form onSubmit={handleSumbit}>
                     <label htmlFor="queryInput">Search:</label>
                     <input
@@ -116,10 +129,10 @@ function MovieSearchList() {
                     Total Results Found: {totalResults} Total Pages: {totalPages} Current Page: {pageNum}</p>
                 </div>
 
-            </section>  
-            <section className = "searchresults" class="d-flex justify-content-around">             
+            </div>  
+            <div className = "searchresults" class="d-flex justify-content-around">             
                 { resultBoolean ? (
-                    <div class="row g-4">                    
+                    <div class="row g-3">                    
                     {/* Below is a test of mapping the search results array to individual objects */}
                         {movies.map(movie => {
                         //movies.TotalResults coult be zero?
@@ -130,12 +143,20 @@ function MovieSearchList() {
                             <MovieInfoCard2 movie={movie.imdbID} key={movie.imdbID}></MovieInfoCard2>
                         </div>
                                 )})}
+                        <div className="loadMore" style={{paddingBottom: '1rem'}}>
+                            {(totalPages !== pageNum) && (totalPages !== 0) && 
+                            <button className="load-more-btn"  onClick={() => loadMore()}>{loading ? 'Loading...' : 'Load More'}</button>}
+            
+                        </div>
                     </div>
+                    
+
                     ) : (
                     <div>{error}</div>
                     )
                 }
-            </section>
+            </div>
+
 
                 
             
