@@ -1,11 +1,11 @@
 .footer {
-    background-color: #013D5B;
-    min-height: 10vh;
+    background-color: #160708;
+    min-height: 15vh;
     display: flex; 
     flex-direction: column; 
     align-items: center;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
+    font-size: calc(10px + 1vmin);
     color: white;
     bottom: 0;
     left:0;

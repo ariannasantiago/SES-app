@@ -1,9 +1,10 @@
   .moviesearchlist {
-    width: 80%;
-    margin: 2rem auto 5rem; 
+    width: 95%;
+    margin: 1rem auto; 
     padding: 20px; 
     border: 1px dotted black; 
-    height: 80vh; 
+    min-height: 75vh; 
+    max-height: 80vh;
     overflow-y: auto;
     display: flex; 
     flex-direction: column;
@@ -11,9 +12,9 @@
 }
 
 .searchform {
-    background-color: beige;
+    background-color: #dddbdb;
     background-size: cover;
-    padding: 1rem;
+    padding: .5rem;
 
     display: grid;
     align-items: center;
@@ -28,17 +29,20 @@ form {
 }
 
 .search {
-    background-color: #008140;
-    padding: 20px 20px;
+    background-color: #628565;
+    padding: 1rem .7rem;
     height: 10px;
     color: white; 
     border-radius: 12px;
     line-height: 0px;
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0;
 }
 
 label {
-    font-size: 20px;
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 
@@ -47,6 +51,7 @@ label {
     border-radius: 5px;
     padding: 10px;
     margin: 10px;
+    height: 2.5rem;
 }
 
 .searchResults {

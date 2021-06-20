@@ -6,6 +6,7 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: blanchedalmond;
 
   
 }
@@ -30,16 +31,23 @@ html {
 }
 
 button {
-  background-color: goldenrod;
+  background-color: #a14444;
   text-decoration: none;
   color: white;
   border-radius: .25rem;
   text-align: center;
   display: inline-block;
   transition: all .3s;
+  margin: 10px;
+  border-radius: .25rem;
+  border-width: .08rem;
 }
 
 button:hover {
-  opacity: .6;
+  opacity: .7;
 }
+
+form {
+  border-width: 1rem;
+ }
 

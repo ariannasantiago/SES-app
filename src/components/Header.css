@@ -5,8 +5,9 @@
 
     background: url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW92aWUlMjB0aGVhdGVyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60') center ;
     background-size: cover;
-    padding: 4rem 2rem;
+    padding: 1rem 3rem;
     min-height: 10vh;
+    max-height: 65vh;
 
     /* grid styles */
     display: grid;
@@ -16,12 +17,12 @@
 }
 
 .header > h1 {
-    font-size: 5rem;
-    font-weight: 200;
-    padding-bottom: 1rem;
+    font-size: 4rem;
+    font-weight: 300;
+    padding: 1rem;
 }
 
-.header > tagline > p {
-    font-size: 1.75rem;
-    font-weight: 900;
+.header > div > p {
+    font-size: 1.5rem;
+    font-weight: 600;
 }

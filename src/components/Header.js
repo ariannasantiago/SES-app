@@ -5,9 +5,9 @@ function Header(props) {
     return (
         <div className="header">
             <h1>{props.title}</h1>
-            <tagline>
+            <div>
                 <p>Search and browse hundreds of thousands of movies with just one click.</p>
-            </tagline>
+            </div>
         </div>
     )
 }

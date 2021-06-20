@@ -111,6 +111,7 @@ function MovieSearchList() {
                         handleSumbit()}}}> */}
                     <label htmlFor="queryInput">Search:</label>
                     <input
+                        placeholder="enter a search term"
                         id="queryInput"
                         type="text"
                         value={query}
@@ -119,18 +120,17 @@ function MovieSearchList() {
                     <button className="search">Submit</button>
 
                 </form>
-                
-
-                <div className="pagebuttons">
-                    <button onClick={previousPage} style={{marginLeft: "0%"}}>Previous Page</button>
-                    <button 
-                        onClick={nextPage} style={{marginLeft: "0%"}}>Next Page 
-                    </button>
-                </div>
-
+            
                 <div className="searchdetails">
                     <p>Search Term: {query} <br></br>
                     Total Results : {totalResults} | Total Pages: {totalPages} | Current Page: {pageNum}</p>
+                </div>
+                
+                <div className="pagebuttons">
+                    <button class="mx-1 rounded" onClick={previousPage} style={{marginLeft: "0%"}}>Previous Page</button>
+                    <button class="mx-1 rounded"
+                        onClick={nextPage} style={{marginLeft: "0%"}}>Next Page 
+                    </button>
                 </div>
 
             </div>  
@@ -156,7 +156,7 @@ function MovieSearchList() {
                             {(totalPages !== pageNum) && 
                             (totalPages !== 0) && 
                                 //change button text if results loading
-                                <button className="load-more-btn"  onClick={() => loadMore()}>          {loading ? 'Loading...' : 'Load More'} 
+                                <button class="rounded" onClick={() => loadMore()}>          {loading ? 'Loading...' : 'Load More'} 
                                 </button>
                             }
                         </div>

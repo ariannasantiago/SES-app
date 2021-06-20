@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Header title="FindFlix"></Header>
       <MovieSearchList></MovieSearchList>
-      <Footer title="2021"></Footer>
+      <Footer title="FindFlix"></Footer>
     </div>
   );
 }
