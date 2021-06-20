@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import './MovieSearchList.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MovieInfoCard2 from './MovieInfoCard2';
+import MovieInfoCard from './MovieInfoCard';
 
 function MovieSearchList() {
-    const [movies, setMovies] = useState([])
+    const [movies, setMovies] = useState([]);
     const [query, setQuery] = useState('');
     const [totalResults, setTotalResults] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
     const [pageNum, setPageNum] = useState(1);
-    const [resultBoolean, setresultBoolean] = useState(true);
+    const [resultBoolean, setresultBoolean] = useState(false);
     const [error, setError] = useState(null);
 
     const [loading, setLoading] = useState(false);
@@ -21,90 +21,94 @@ function MovieSearchList() {
         fetchMyAPI();
     }
 
-    async function fetchMyAPI () {
+    async function fetchMyAPI() {
         const API_KEY = process.env.REACT_APP_API_KEY;
         const searchParam = encodeURIComponent(query)
-        console.log(searchParam);
-        const apiURL = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchParam}&type=movie&page=${pageNum}&r=json`;
-        console.log(apiURL);
+        const apiURL = `https://www.omdbapi.com/?apikey=${API_KEY}&s=${searchParam}&type=movie&page=${pageNum}&r=json`
+        //console.log(searchParam);
+        //console.log(apiURL);
         
         let response = await fetch(apiURL);
         response = await response.json();
         
-        console.log(response);
-
+        //console.log(response);
+        
+        //if fetch unsuccessful
         if (response.Response === "False") {
-            setresultBoolean(false, console.log('Results? ', resultBoolean));
+            setresultBoolean(false);
             setError(response.Error);
             setPageNum(1);
             setTotalResults(0);
+            //console.log('Results? ', resultBoolean)
         } 
+        //successful fetch triggered by "load more"; set loading false when finished
         else if (loading) {
-            //if want to load more, add movies to result array, set loading false when finished
             console.log("loading brand triggered");
             setMovies([...movies, ...response['Search']]);
             setLoading(false, console.log('loading false'));
         }
+        //successful fetch triggered by search or pagination
         else {
 
-            setresultBoolean(true, console.log('Results? ', resultBoolean));
-
-            console.log('Search query response',response['Search']);
+            setresultBoolean(true);
             setMovies(response['Search']);
-
-            console.log('response results: ',response.totalResults);
-            setTotalResults(response.totalResults, console.log('Total Results: ', totalResults));
-
+            setTotalResults(response.totalResults);
             const pages = Math.ceil((response.totalResults)/10);
-            setTotalPages(pages, console.log('Total Pages: ', totalPages));
+            setTotalPages(pages);
+
+            // console.log('Results? ', resultBoolean);
+            // console.log('Search query response', movies);
+            // console.log('response results: ', totalResults);
+            // console.log('Total Pages: ', totalPages);
 
         }
 
     }
 
-    //2nd if-statement in nextPage and previousPage allows last/first page of results to be fetched and rendered. Used as a "band-aid" fix for render/fetch lag of setState(), not ideal as it re-queries existing information.
 
+    //ensure immediate re-rendering and that API only queried once; dependent on updating pageNum
     useEffect(() => {
         if(query !== "") {
             fetchMyAPI();
         }
     }, [pageNum]);
 
+
+    //Pagination Functions: only update pageNum if possible; re-render triggered by useEffect
     function nextPage() {
         if (pageNum < totalPages) {
-            setPageNum(pageNum+1, 
-                console.log('next -> current page:', pageNum));
+            setPageNum(pageNum+1); 
+            //console.log('next -> current page:', pageNum));
         }
-
-
-        console.log('next -> current page:', pageNum);
-
     } 
-
-    //hello
 
     function previousPage() {
         if (pageNum !== 1) {
             setPageNum(pageNum-1,  
-            console.log('prev -> current page',pageNum)
+            //console.log('prev -> current page', pageNum);
             );
         }
     }
 
     function loadMore() {
         if (pageNum < totalPages) {
-            console.log("load more clicked");
-            setLoading(true, console.log('loading true'));
+            //console.log("load more clicked");
+            setLoading(true); //sets Loading true so button text changes
             setPageNum(pageNum+1);
         }
     }
 
 
-
     return (
         <div className="moviesearchlist">
-            <div class="hero">
+            <div class="searchform">
+
                 <form onSubmit={handleSumbit}>
+                    {/* (query) => 
+                    {if (query === '') {
+                        setError('Search term cannot be blank.')
+                    } else {
+                        handleSumbit()}}}> */}
                     <label htmlFor="queryInput">Search:</label>
                     <input
                         id="queryInput"
@@ -124,42 +128,52 @@ function MovieSearchList() {
                     </button>
                 </div>
 
-                <div>
+                <div className="searchdetails">
                     <p>Search Term: {query} <br></br>
-                    Total Results Found: {totalResults} Total Pages: {totalPages} Current Page: {pageNum}</p>
+                    Total Results : {totalResults} | Total Pages: {totalPages} | Current Page: {pageNum}</p>
                 </div>
 
             </div>  
+
             <div className = "searchresults" class="d-flex justify-content-around">             
-                { resultBoolean ? (
-                    <div class="row g-3">                    
-                    {/* Below is a test of mapping the search results array to individual objects */}
+                { resultBoolean ? ( //if results available
+
+                    <div class="row g-3">  
                         {movies.map(movie => {
-                        //movies.TotalResults coult be zero?
+                        //map "movies" array to access more details
                             return(
-                        // <li movie={movie} >{movie.Title} {movie.imdbID}</li>
+                        //use below for testing paginations/title search functionality: 
+                        //  <li movie={movie} >{movie.Title} {movie.imdbID}</li>
                         
-                        <div class="col">
-                            <MovieInfoCard2 movie={movie.imdbID} key={movie.imdbID}></MovieInfoCard2>
+                                <div class="col">
+                                    <MovieInfoCard movie={movie.imdbID} key={movie.imdbID}></MovieInfoCard>
+                                </div>
+                            )
+                        })}
+                        
+                        {/* "load more" button at bottom of results if more results available */}
+                        <div className="loadMore">
+                            {(totalPages !== pageNum) && 
+                            (totalPages !== 0) && 
+                                //change button text if results loading
+                                <button className="load-more-btn"  onClick={() => loadMore()}>          {loading ? 'Loading...' : 'Load More'} 
+                                </button>
+                            }
                         </div>
-                                )})}
-                        <div className="loadMore" style={{paddingBottom: '1rem'}}>
-                            {(totalPages !== pageNum) && (totalPages !== 0) && 
-                            <button className="load-more-btn"  onClick={() => loadMore()}>{loading ? 'Loading...' : 'Load More'}</button>}
-            
+
+                        <div className="searchdetails" style={{paddingBottom: '1rem'}}>
+                            <p>Search Term: {query} <br></br>
+                            Total Results: {totalResults} | Total Pages: {totalPages} | Current Page: {pageNum}</p>
                         </div>
+
                     </div>
                     
 
-                    ) : (
+                ) : (
                     <div>{error}</div>
-                    )
+                )
                 }
             </div>
-
-
-                
-            
 
         </div>
     )

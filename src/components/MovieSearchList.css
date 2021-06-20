@@ -10,7 +10,7 @@
     
 }
 
-.hero {
+.searchform {
     background-color: beige;
     background-size: cover;
     padding: 1rem;
@@ -52,18 +52,3 @@ label {
 .searchResults {
     margin-top: 3rem;
 }
-
-/* .moviecards {
-    padding: 2rem 1rem;
-} */
-
-/* .moviecards > div {
-    display: grid;s
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    grid-gap: 1rem;
-}
-
-.moviecards > div > li {
-    border: 1px solid #E2E2E2;
-    border-radius: .5rem;
-} */
