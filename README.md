@@ -57,6 +57,7 @@ This website pulls data about movies using the [OMDB API](https://www.omdbapi.co
 ## **Challenges Encountered**
 - Figuring out the format with which to store my API key and "Now Playing" custom poster URL. It took some trial and error before I realized how simple it was.
 - Learning how to re-query API for each individual movie title via its unique IMDB-ID. 2 main problems were encountered:
+     - I spent a long time figuring out how grab the actual 'Search' array from the .json response and using it to fill my 'movies' state array. I ended up rewriting much of my fetch function from scratch by following Kristen's tutorial. It turned out that I was missing a set of quotation marks! 
      - I had to think through the process of passing each individual movie's ID to my MovieCard component (minimizing unecessary information), and then set up the necessary state hooks. 
      - Through use of my network request log, I realized that a given search would query the API several times, resulting in multiple requests for each ID. Writing my asynch fetch function inside useEffect solved this.
 - Understanding how grids work with Bootstrap, and figuring out how to make my card grid responsive beyond what the standard Card template was giving me.
@@ -67,7 +68,7 @@ This website pulls data about movies using the [OMDB API](https://www.omdbapi.co
 - Note: first commit is attributed to a friend who was logged into her git on my computer. Her computer had crashed while working on a project, so she used my machine to rewrite and submit it. I didn't know to check the active git user before doing my first commit, but fixed it afterwards.
 
 ## **What I Learned**
-This project was my first foray into web development, and seemed very overwhelming at first. However, I thoroughly enjoyed immersing myself in through online tutorials and the C1 SES office hours, and building upon my existing knowledge of basic program design and data structures. It was fun to utilize an API for the first time, and I'm excited to apply my new skills in other contexts. I also learned how use GitHub and gain a decent grasp of Git commands, and I thought it was cool to deploy my first GitHub page! I look forward to continually improving upon this website, and implementing more features and functionality.
+This project was my first foray into web development, and seemed very overwhelming at first. However, I thoroughly enjoyed immersing myself in through online tutorials and the C1 SES office hours, and building upon my existing knowledge of basic program design and data structures. It was fun to utilize an API for the first time, and I'm excited to apply my new skills in other contexts. It was a fun challenge to learn how to use .json responses, especially with the nested arrays. I also learned how use GitHub and gain a decent grasp of Git commands, and I thought it was cool to deploy my first GitHub page! I look forward to continually improving upon this website, and implementing more features and functionality.
 
 ## **To Dos/Action Items**
 - Allow users to input a date range and return corresponding results (potentially via a second "moviesFiltered" state array which is populated from general "movies" state array via a modification of LoadMore's fetch branch)
